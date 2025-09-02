@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -19,7 +20,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     Optional<Customer> findByFinkod(String finkod);
 
     @Query(value = "select * from customer", nativeQuery = true)
-    Optional<Customer> getAll();
+    List < Optional<Customer>>  getAll();
 
     @Modifying
     @Transactional

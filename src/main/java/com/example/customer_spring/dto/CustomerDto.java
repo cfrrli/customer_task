@@ -1,44 +1,54 @@
 package com.example.customer_spring.dto;
 
+import lombok.*;
 import org.mapstruct.Mapping;
 
 
-
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 public class CustomerDto {
-    private Integer id;
+
     private String name;
     private String surname;
+    private Integer age;
 
+    public CustomerDto (CustomerDtoBuilder cs) {
+        this.name = cs.name;
+        this.age = cs.age;
+        this.surname = cs.surname;
+    }
 
-    public CustomerDto(Integer id, String name, String surname) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
+    public static CustomerDtoBuilder builder () {
+        return new CustomerDtoBuilder();
     }
 
 
+    public static class CustomerDtoBuilder {
+        private String name;
+        private String surname;
+        private Integer age;
 
-    public Integer getId() {
-        return id;
+        public CustomerDtoBuilder name (String name) {
+            this.name = name;
+            return this;
+        }
+        public CustomerDtoBuilder surname (String surname) {
+            this.surname = surname;
+            return this;
+        }
+        public CustomerDtoBuilder age (Integer age) {
+            this.age = age;
+            return this;
+        }
+
+        public CustomerDto build () {
+            return new CustomerDto (this);
+        }
+
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
 }
